@@ -37,8 +37,8 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Failed step
-      run: "I will fail"
+        run: "I will fail"
 
       # Runs a single command using the runners shell
       - name: Say goodbye
-      run: "Goodbye!"
+        run: "Goodbye!"
