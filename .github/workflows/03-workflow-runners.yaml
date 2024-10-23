@@ -36,12 +36,13 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Show OS
+        shell: bash 
         run: echo "This job is running on a Windows runner."
 
-  # job 2 called "mac-echo"
+  # job 3 called "mac-echo"
   mac-echo:
     # The type of runner that the job will run on
-    runs-on: mac-echo
+    runs-on: macos-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
