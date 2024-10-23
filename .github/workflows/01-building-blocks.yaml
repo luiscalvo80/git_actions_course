@@ -24,7 +24,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Say hello
-        run: "Hello, World!"
+        run: echo "Hello, World!"
 
   # job 1 called "echo-hello"
   echo-goodbye:
@@ -37,8 +37,8 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Failed step
-        run: "I will fail"
+        run: echo "I will fail"
 
       # Runs a single command using the runners shell
       - name: Say goodbye
-        run: "Goodbye!"
+        run: echo "Goodbye!"
