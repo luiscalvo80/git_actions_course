@@ -1,1 +1,1 @@
-Repository Containing all examples and notes for the training
+container for all materials of the training
