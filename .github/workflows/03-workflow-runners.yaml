@@ -1,0 +1,52 @@
+# This is a basic workflow to help you get started with Actions
+
+name: 03 - Workflow Runners
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # job 1 called "ubuntu-echo"
+  ubuntu-echo:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v4
+
+      # Runs a single command using the runners shell
+      - name: Show OS
+        run: echo "This job is running on an Ubuntu runner."
+
+  # job 2 called "windows-echo"
+  windows-echo:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v4
+
+      # Runs a single command using the runners shell
+      - name: Show OS
+        run: echo "This job is running on a Windows runner."
+
+  # job 2 called "mac-echo"
+  mac-echo:
+    # The type of runner that the job will run on
+    runs-on: mac-echo
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v4
+
+      # Runs a single command using the runners shell
+      - name: Show OS
+        run: echo "This job is running on a MacOS runner."
