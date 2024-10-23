@@ -1,0 +1,11 @@
+name: 01 - Using Actions
+
+on: push
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        #1. installd ependencies of our react app
+        #2. Execute automated tests
+        #3 Publish Application
