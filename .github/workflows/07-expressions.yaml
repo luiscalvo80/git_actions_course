@@ -9,7 +9,7 @@ on:
         default: false
 
 # Define a dynamic run-name using a ternary operation based on the debug input
-run-name: ${{ '07 - Using Expressions | DEBUG - ' }}${{ inputs.debug && 'true' || 'false' }}
+run-name: ${{ '07 - Using Expressions | DEBUG - ' }}${{ github.event.inputs.debug && 'ON' || 'OFF' }}
 
 jobs:
   echo:
@@ -20,7 +20,7 @@ jobs:
 
       # Display GitHub context information if debug is enabled
       - name: "[debug] Print start-up data"
-        if: ${{ inputs.debug == 'true' }}
+        if: ${{ github.event.inputs.debug == 'true' }}
         run: |
           echo "Triggered by: ${{ github.event_name }}"
           echo "Branch: ${{ github.ref }}"
@@ -29,7 +29,7 @@ jobs:
           echo "Runner OS: ${{ runner.os }}"
 
       - name: "[debug] Print when triggered from main"
-        if: ${{ inputs.debug == 'true' && github.ref == 'refs/heads/main' }}
+        if: ${{ github.event.inputs.debug == 'true' && github.ref == 'refs/heads/main' }}
         run: |
           echo "I was triggered from main"
 
