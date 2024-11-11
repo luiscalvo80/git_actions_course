@@ -1,0 +1,51 @@
+name: 09 - Using Functions
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  echo1:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Print PR Information Steps
+      - name: Print PR title
+        if: ${{ github.event_name == 'pull_request' }}
+        run: echo "PR Title: ${{ github.event.pull_request.title }}"
+
+      - name: Print PR labels
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          echo "PR Labels:"
+          echo "${{ toJSON(github.event.pull_request.labels) }}" | jq .
+
+      - name: Bug step
+        if: ${{ github.event_name == 'pull_request' && steps.Failing_step.outcome == 'failure' && contains(github.event.pull_request.title, 'fix') }}
+        run: echo "I am a bug fix"
+
+      # Sleep Step
+      - name: Sleep for 20 seconds
+        run: sleep 20
+
+      # Failing Step
+      - name: Failing step
+        id: Failing_step
+        run: exit 1
+
+      # Conditional Steps Based on Outcome of Failing Step
+      - name: I will be skipped
+        if: ${{ steps.Failing_step.outcome == 'success' }}
+        run: echo "I will print if previous steps succeed."
+
+      - name: I will execute on failure
+        if: ${{ steps.Failing_step.outcome == 'failure' }}
+        run: echo "I will print if any previous step fails."
+
+      - name: I will always print, except when the workflow is cancelled
+        if: ${{ steps.Failing_step.outcome != 'cancelled' }}
+        run: echo "I will always print, except when the workflow is cancelled."
+
+      - name: I will execute when cancelled
+        if: ${{ steps.Failing_step.outcome == 'cancelled' }}
+        run: echo "I will print only when the workflow is cancelled."
