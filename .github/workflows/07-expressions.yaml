@@ -9,7 +9,7 @@ on:
         default: false
 
 # Define a dynamic run-name using a ternary operation based on the debug input
-run-name: ${{ '07 - Using Expressions | DEBUG - ' }}${{ inputs.debug && 'ON' || 'OFF' }}
+run-name: ${{ '07 - Using Expressions | DEBUG - ' }}${{ inputs.debug && 'true' || 'false' }}
 
 jobs:
   echo:
