@@ -1,12 +1,15 @@
 name: 07 - Using Expressions
 
 on:
-    push:
-    workflow_dispatch:
-      inputs:
-        debug:
-          type: boolean
-          default: false
+  push:
+  workflow_dispatch:
+    inputs:
+      debug:
+        type: boolean
+        default: false
+
+# Define a dynamic run-name using a ternary operation based on the debug input
+run-name: ${{ '07 - Using Expressions | DEBUG - ' }}${{ inputs.debug && 'ON' || 'OFF' }}
 
 jobs:
   echo:
@@ -15,24 +18,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-        # Display GitHub context information
+      # Display GitHub context information if debug is enabled
       - name: "[debug] Print start-up data"
         if: ${{ inputs.debug == 'true' }}
         run: |
-                echo "Triggered by: ${{ github.event_name }}"
-                echo "Branch: ${{ github.ref }}"
-                echo "Commit SHA: ${{ github.sha }}"
-                echo "Actor: ${{ github.actor }}"
-                echo "Runner OS: ${{ github.workflow }}"
+          echo "Triggered by: ${{ github.event_name }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "Commit SHA: ${{ github.sha }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Runner OS: ${{ runner.os }}"
 
       - name: "[debug] Print when triggered from main"
         if: ${{ inputs.debug == 'true' && github.ref == 'refs/heads/main' }}
         run: |
-                echo "I was triggered from main"
-                
+          echo "I was triggered from main"
+
       - name: "Greeting"
         run: |
-                echo "Hello, world"      
+          echo "Hello, world"      
 
       # Retrieve and display a repository-level variable
       - name: Retrieve Repository Variable
