@@ -12,7 +12,8 @@ jobs:
       # Print PR Information Steps
       - name: Print PR title
         if: ${{ github.event_name == 'pull_request' }}
-        run: echo "PR Title: ${{ github.event.pull_request.title }}"
+        run: |
+          echo "PR Title: ${{ github.event.pull_request.title }}"
 
       - name: Print PR labels
         if: ${{ github.event_name == 'pull_request' }}
