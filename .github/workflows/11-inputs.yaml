@@ -21,16 +21,15 @@ jobs:
 
     steps:
       - name: Build
-        run: |
-          echo "Building from tag ${{ inputs['tag']}}"
+        run: echo "Building from tag ${{ inputs['tag']}}"
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    if: ${{ inputs['dry-run'] == 'false' && inputs['target'] == inputs['tag'] }}
+    if: ${{ !inputs['dry-run']}}
+    environment: ${{ inputs['target']}}
     
     steps:
       - name: Deploy
-        run: |
-          echo "Deploying to ${{ inputs['tag']}}"
+        run: echo "Deploying to ${{ inputs['target']}}..."
           
