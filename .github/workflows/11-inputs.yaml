@@ -22,15 +22,15 @@ jobs:
     steps:
       - name: Build
         run: |
-          echo "Building from tag ${{ github.event.inputs['tag']}}"
+          echo "Building from tag ${{ inputs['tag']}}"
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    if: ${{ github.event.inputs['dry-run'] == 'false' && github.event.inputs['target'] == github.event.inputs['tag'] }}
+    if: ${{ inputs['dry-run'] == 'false' && inputs['target'] == inputs['tag'] }}
     
     steps:
       - name: Deploy
         run: |
-          echo "Deploying to ${{ github.event.inputs['tag']}}"
+          echo "Deploying to ${{ inputs['tag']}}"
           
