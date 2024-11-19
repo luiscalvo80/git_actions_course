@@ -15,11 +15,11 @@ jobs:
 
     # Set the environment parameter dynamically based on the target-env input
     environment: ${{ github.event.inputs.target-env }}
+    env:
+        # Retrieve MY_ENV_VALUE from the environment or use a default value
+        my_env_value: ${{ github.event.inputs.target-env == 'production' && secrets.PROD_ENV_VALUE || github.event.inputs.target-env == 'staging' && secrets.STAGING_ENV_VALUE || 'default value' }}
 
     steps:
       # The job should contain a single step, named Echo vars, which should print "Env variable: <retrieve the value of my-env-value here>" to the screen         76
       - name: Echo vars
-        run: echo "Env variable: ${{ env.my_env_value }}"
-        env:
-          # Retrieve MY_ENV_VALUE from the environment or use a default value
-          my_env_value: ${{ vars.MY_ENV_VALUE || 'default value' }}
+        run: "echo 'Env variable: ${{ env.my_env_value }}'"
