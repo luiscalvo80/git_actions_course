@@ -1,12 +1,14 @@
 name: 16 - Working with Environments
+
 on:
-    workflow_dispatch:
-        inputs:
-            target-env:
-                description: 'target-env'
-                type: environment
-                default: 'staging'
-    
+  workflow_dispatch:
+    inputs:
+      target-env:
+        description: 'target-env'
+        type: environment
+        default: 'staging'
+
+# Set the run-name dynamically using the target-env input
 run-name: 16 - Working with Environments | env - ${{ github.event.inputs.target-env }}
 
 jobs:
@@ -17,13 +19,14 @@ jobs:
     environment: ${{ github.event.inputs.target-env }}
 
     steps:
-        # Step 1: Checkout code
-        - name: Checkout code
-          uses: actions/checkout@v3
-  
-        # Step 2: Define environment variable and echo it
-        - name: Echo vars
-          run: echo "Env variable: $MY_ENV_VALUE"
-          env:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Define environment variable and echo it
+      - name: Echo vars
+        run: |
+          echo "Env variable: ${{ env.my_env_value }}"
+        env:
           # Dynamically set my_env_value based on the selected environment (prod or staging)
           my_env_value: ${{ github.event.inputs.target-env == 'prod' && secrets.MY_ENV_VALUE_PROD || github.event.inputs.target-env == 'staging' && secrets.MY_ENV_VALUE_STAGING || 'default value' }}
