@@ -28,7 +28,7 @@ jobs:
 
           # Intentional mistake
           echo "mistake=true" > "$GITHUB_OUTPUT"
-          cat "$GITHUB_OUTPUT"
+          cat "$GITHUB_OUTPUT"grwr
 
   deploy:
     runs-on: ubuntu-latest
