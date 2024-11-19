@@ -15,7 +15,7 @@ jobs:
   echo:
     runs-on: ubuntu-latest
 
-    # Set the environment parameter dynamically based on the target-env input
+    # Set sf the environment parameter dynamically based on the target-env input
     environment: ${{ github.event.inputs.target-env }}
 
     steps:
