@@ -23,7 +23,7 @@ jobs:
   
         # Step 2: Define environment variable and echo it
         - name: Echo vars
-          run: "echo 'Env variable: ${{ env.my_env_value }}'"
+          run: echo "Env variable: $MY_ENV_VALUE"
           env:
-            # Dynamically set my_env_value based on the selected environment (prod or staging)
-            my_env_value: ${{ github.event.inputs.target-env == 'prod' && secrets.MY_ENV_VALUE_PROD || github.event.inputs.target-env == 'staging' && secrets.MY_ENV_VALUE_STAGING || 'default value' }}
+          # Dynamically set my_env_value based on the selected environment (prod or staging)
+          my_env_value: ${{ github.event.inputs.target-env == 'prod' && secrets.MY_ENV_VALUE_PROD || github.event.inputs.target-env == 'staging' && secrets.MY_ENV_VALUE_STAGING || 'default value' }}
